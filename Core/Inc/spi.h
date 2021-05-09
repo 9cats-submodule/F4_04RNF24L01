@@ -28,7 +28,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "base.h"
 /* USER CODE END Includes */
 
 extern SPI_HandleTypeDef hspi1;
@@ -40,7 +40,9 @@ extern SPI_HandleTypeDef hspi1;
 void MX_SPI1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void SPI1_Init(void);
+void SPI1_SetSpeed(u8 SpeedSet);
+u8 SPI1_ReadWriteByte(u8 TxData);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

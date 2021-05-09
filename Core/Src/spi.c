@@ -156,6 +156,7 @@ void SPI1_Init(void)
 	// SPI_Cmd(SPI1, ENABLE); //使能SPI外设
 
   //以上内容都已通过CubeMX配置
+  __HAL_SPI_ENABLE(&hspi1); //使能SPI1
 	SPI1_ReadWriteByte(0xff); //启动传输
 }
 //SPI1速度设置函数

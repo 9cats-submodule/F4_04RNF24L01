@@ -104,18 +104,18 @@ int main(void)
  	NRF24L01_Init();
 
  	POINT_COLOR=RED;//
-	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
-	LCD_ShowString(30,70,200,16,16,"NRF24L01 TEST");	
-	LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
-	LCD_ShowString(30,110,200,16,16,"2014/5/9");
+	LCD_ShowString(30,50,200,16,16,(u8 *)"Explorer STM32F4");
+	LCD_ShowString(30,70,200,16,16,(u8 *)"NRF24L01 TEST");
+	LCD_ShowString(30,90,200,16,16,(u8 *)"ATOM@ALIENTEK");
+	LCD_ShowString(30,110,200,16,16,(u8 *)"2014/5/9");
 	while(NRF24L01_Check())
 	{
-		LCD_ShowString(30,130,200,16,16,"NRF24L01 Error");
+		LCD_ShowString(30,130,200,16,16,(u8 *)"NRF24L01 Error");
 		delay_ms(200);
 		LCD_Fill(30,130,239,130+16,WHITE);
  		delay_ms(200);
 	}
-	LCD_ShowString(30,130,200,16,16,"NRF24L01 OK");
+	LCD_ShowString(30,130,200,16,16,(u8 *)"NRF24L01 OK");
  	while(1)
 	{	
 		key=KEY_Scan(0);
@@ -129,7 +129,7 @@ int main(void)
 			break;
 		}
 		t++;
-		if(t==100)LCD_ShowString(10,150,230,16,16,"KEY0:RX_Mode  KEY1:TX_Mode"); //闂?儊鏄剧ず鎻愮ず淇℃伅
+		if(t==100)LCD_ShowString(10,150,230,16,16,(u8 *)"KEY0:RX_Mode  KEY1:TX_Mode");
  		if(t==200)
 		{	
 			LCD_Fill(10,150,230,150+16,WHITE);
@@ -137,37 +137,37 @@ int main(void)
 		}
 		delay_ms(5);	  
 	}   
- 	LCD_Fill(10,150,240,166,WHITE);//娓呯┖涓婇潰鐨勬樉绀?		  
- 	POINT_COLOR=BLUE;//璁剧疆瀛椾綋涓鸿摑鑹?
-   	if(mode==0)//RX妯″紡
+ 	LCD_Fill(10,150,240,166,WHITE);
+ 	POINT_COLOR=BLUE;
+   	if(mode==0)
 	{
-		LCD_ShowString(30,150,200,16,16,"NRF24L01 RX_Mode");	
-		LCD_ShowString(30,170,200,16,16,"Received DATA:");	
+		LCD_ShowString(30,150,200,16,16,(u8 *)"NRF24L01 RX_Mode");
+		LCD_ShowString(30,170,200,16,16,(u8 *)"Received DATA:");
 		NRF24L01_RX_Mode();		  
 		while(1)
 		{	  		    		    				 
-			if(NRF24L01_RxPacket(tmp_buf)==0)//涓?鏃︽帴鏀跺埌淇℃伅,鍒欐樉绀哄嚭鏉?.
+			if(NRF24L01_RxPacket(tmp_buf)==0)
 			{
-				tmp_buf[32]=0;//鍔犲叆瀛楃?涓茬粨鏉熺?
+				tmp_buf[32]=0;
 				LCD_ShowString(0,190,lcddev.width-1,32,16,tmp_buf);    
 			}else delay_us(100);	   
 			t++;
-			if(t==10000)//澶х害1s閽熸敼鍙樹竴娆＄姸鎬?
+			if(t==10000)
 			{
 				t=0;
 				LED0_T;
 			} 				    
 		};	
-	}else//TX妯″紡
+	}else
 	{							    
-		LCD_ShowString(30,150,200,16,16,"NRF24L01 TX_Mode");	
+		LCD_ShowString(30,150,200,16,16,(u8 *)"NRF24L01 TX_Mode");
 		NRF24L01_TX_Mode();
-		mode=' ';//浠庣┖鏍奸敭寮?濮?  
+		mode=' ';
 		while(1)
 		{	  		   				 
 			if(NRF24L01_TxPacket(tmp_buf)==TX_OK)
 			{
-				LCD_ShowString(30,170,239,32,16,"Sended DATA:");	
+				LCD_ShowString(30,170,239,32,16,(u8 *)"Sended DATA:");
 				LCD_ShowString(0,190,lcddev.width-1,32,16,tmp_buf); 
 				key=mode;
 				for(t=0;t<32;t++)
@@ -178,11 +178,11 @@ int main(void)
 				}
 				mode++; 
 				if(mode>'~')mode=' ';  	  
-				tmp_buf[32]=0;//鍔犲叆缁撴潫绗?		   
+				tmp_buf[32]=0;
 			}else
 			{										   	
- 				LCD_Fill(0,170,lcddev.width,170+16*3,WHITE);//娓呯┖鏄剧ず			   
-				LCD_ShowString(30,170,lcddev.width-1,32,16,"Send Failed "); 
+ 				LCD_Fill(0,170,lcddev.width,170+16*3,WHITE);
+				LCD_ShowString(30,170,lcddev.width-1,32,16,(u8 *)"Send Failed ");
 			};
 			LED0_T;
 			delay_ms(1500);				    
